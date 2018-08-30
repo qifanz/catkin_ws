@@ -1,0 +1,8 @@
+prefix=/home/GTL/qzhang/catkin_ws/devel
+
+Name: floor_plane_ceres
+Description: Description of floor_plane_ceres
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/GTL/qzhang/catkin_ws/devel/lib 
+Requires: pcl_ros roscpp sensor_msgs tf visualization_msgs

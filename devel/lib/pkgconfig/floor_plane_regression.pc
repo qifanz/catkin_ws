@@ -1,0 +1,8 @@
+prefix=/home/GTL/qzhang/catkin_ws/devel
+
+Name: floor_plane_regression
+Description: Description of floor_plane_regression
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/GTL/qzhang/catkin_ws/devel/lib 
+Requires: pcl_ros roscpp sensor_msgs tf visualization_msgs message_runtime
