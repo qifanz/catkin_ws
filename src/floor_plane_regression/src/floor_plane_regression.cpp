@@ -10,6 +10,7 @@
 #include <Eigen/Core>
 #include <Eigen/Cholesky>
 
+#include <cmath>
 class FloorPlaneRegression {
     protected:
         ros::Subscriber scan_sub_;
@@ -88,14 +89,19 @@ class FloorPlaneRegression {
             
             }
             // Eigen operation on matrices are very natural:
+            double start =ros::Time::now().toSec();
             Eigen::MatrixXf X = (A.transpose() * A).inverse()*A.transpose()*B;
+            double end =ros::Time::now().toSec();
+            double cosAngle =1/sqrt(X(0)*X(0)+X(1)*X(1)+1);
+            double angle=acos(cosAngle)/3.1415926*180;
             // Details on linear solver can be found on 
             // http://eigen.tuxfamily.org/dox-devel/group__TutorialLinearAlgebra.html
             
             // Assuming the result is computed in vector X
             ROS_INFO("Extracted floor plane: z = %.2fx + %.2fy + %.2f",
                     X(0),X(1),X(2));
-
+            ROS_INFO("Time used for calculation is: %.2f",end-start);
+            ROS_INFO("Angle is: %.2f",angle);
             // END OF TODO
 
             // Now build an orientation vector to display a marker in rviz

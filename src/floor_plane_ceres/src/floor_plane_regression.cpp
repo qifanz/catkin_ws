@@ -132,11 +132,18 @@ class FloorPlaneRegression {
 
             // Now we've prepared ceres' solver, we can just run it:
             ceres::Solver::Summary summary;
+            double start =ros::Time::now().toSec();
             ceres::Solve(options, &problem, &summary);
+            double end =ros::Time::now().toSec();
+
+            double cosAngle =1/sqrt(X[0]*X[0]+X[1]*X[1]+1);
+            double angle=acos(cosAngle)/3.1415926*180;
 
             // Assuming the result is computed in vector X
             ROS_INFO("Extracted floor plane: z = %.2fx + %.2fy + %.2f",
                     X[0],X[1],X[2]);
+            ROS_INFO("Time used for calculation is: %.2f",end-start);
+            ROS_INFO("Angle is: %.2f",angle);
 
             // Same code as the linear regression: build the 3D orientation
             Eigen::Vector3f O,u,v,w;
